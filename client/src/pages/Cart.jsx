@@ -64,7 +64,7 @@ const Cart = () => {
         try {
             // Call Backend to Init Payment
             const response = await fetch(
-                "http://localhost:5000/create-ssl-payment",
+                "https://ecommerce-web-nrat.vercel.app/create-ssl-payment",
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },

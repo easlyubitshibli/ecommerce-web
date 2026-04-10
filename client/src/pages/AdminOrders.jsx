@@ -12,7 +12,7 @@ const AdminOrders = () => {
     // 1. Fetch All Orders
     const fetchOrders = async () => {
         try {
-            const response = await fetch("http://localhost:5000/admin/orders");
+            const response = await fetch("https://ecommerce-web-nrat.vercel.app/admin/orders");
             const data = await response.json();
             setOrders(data);
         } catch (error) {
@@ -41,7 +41,7 @@ const AdminOrders = () => {
         if (result.isConfirmed) {
             try {
                 const response = await fetch(
-                    `http://localhost:5000/admin/orders/${id}/status`,
+                    `https://ecommerce-web-nrat.vercel.app/admin/orders/${id}/status`,
                     {
                         method: "PATCH",
                         headers: { "Content-Type": "application/json" },

@@ -16,7 +16,7 @@ const ProductSlider = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await fetch("http://localhost:5000/products");
+                const response = await fetch("https://ecommerce-web-nrat.vercel.app/products");
                 const data = await response.json();
                 // We can slice the data if we only want to show a few in the slider (e.g., first 10)
                 setProducts(data.slice(0, 10));

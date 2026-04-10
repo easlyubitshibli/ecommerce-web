@@ -14,8 +14,8 @@ const AdminHome = () => {
         const fetchProducts = async () => {
             try {
                 const url = searchTerm
-                    ? `http://localhost:5000/products?search=${searchTerm}`
-                    : "http://localhost:5000/products";
+                    ? `https://ecommerce-web-nrat.vercel.app/products?search=${searchTerm}`
+                    : "https://ecommerce-web-nrat.vercel.app/products";
                 const response = await fetch(url);
                 const data = await response.json();
                 setProducts(data);
@@ -41,7 +41,7 @@ const AdminHome = () => {
             if (result.isConfirmed) {
                 try {
                     const response = await fetch(
-                        `http://localhost:5000/products/${id}`,
+                        `https://ecommerce-web-nrat.vercel.app/products/${id}`,
                         {
                             method: "DELETE",
                         }

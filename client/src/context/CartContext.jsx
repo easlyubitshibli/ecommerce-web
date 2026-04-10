@@ -22,7 +22,7 @@ export const CartProvider = ({ children }) => {
             if (user && user._id) {
                 try {
                     const res = await fetch(
-                        `http://localhost:5000/cart/${user._id}`
+                        `https://ecommerce-web-nrat.vercel.app/cart/${user._id}`
                     );
                     const data = await res.json();
                     if (data && Array.isArray(data)) {
@@ -41,7 +41,7 @@ export const CartProvider = ({ children }) => {
         const user = JSON.parse(localStorage.getItem("user"));
         if (user && user._id) {
             try {
-                await fetch("http://localhost:5000/cart/update-quantity", {
+                await fetch("https://ecommerce-web-nrat.vercel.app/cart/update-quantity", {
                     method: "PUT",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
@@ -93,7 +93,7 @@ export const CartProvider = ({ children }) => {
         const user = JSON.parse(localStorage.getItem("user"));
         if (user && user._id) {
             try {
-                await fetch("http://localhost:5000/cart/add", {
+                await fetch("https://ecommerce-web-nrat.vercel.app/cart/add", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ userId: user._id, product }),

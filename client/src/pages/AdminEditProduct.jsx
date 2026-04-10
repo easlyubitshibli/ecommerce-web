@@ -23,7 +23,7 @@ const AdminEditProduct = () => {
         const fetchProduct = async () => {
             try {
                 const response = await fetch(
-                    `http://localhost:5000/products/${id}`
+                    `https://ecommerce-web-nrat.vercel.app/products/${id}`
                 );
                 const data = await response.json();
                 // Fill form with data
@@ -53,7 +53,7 @@ const AdminEditProduct = () => {
 
         try {
             const response = await fetch(
-                `http://localhost:5000/products/${id}`,
+                `https://ecommerce-web-nrat.vercel.app/products/${id}`,
                 {
                     method: "PUT",
                     headers: { "Content-Type": "application/json" },

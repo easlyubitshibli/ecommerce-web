@@ -20,7 +20,7 @@ const AdminUser = () => {
     // 1. Fetch Users from Database
     const fetchUsers = async () => {
         try {
-            const response = await fetch("http://localhost:5000/users");
+            const response = await fetch("https://ecommerce-web-nrat.vercel.app/users");
             const data = await response.json();
             setUsers(data);
         } catch (error) {
@@ -47,7 +47,7 @@ const AdminUser = () => {
             if (result.isConfirmed) {
                 try {
                     const response = await fetch(
-                        `http://localhost:5000/users/${id}`,
+                        `https://ecommerce-web-nrat.vercel.app/users/${id}`,
                         {
                             method: "DELETE",
                         }

@@ -31,14 +31,14 @@ const UserProfile = () => {
                 try {
                     // A. Fetch User Profile
                     const userResponse = await fetch(
-                        `http://localhost:5000/users/${userId}`
+                        `https://ecommerce-web-nrat.vercel.app/users/${userId}`
                     );
                     const userData = await userResponse.json();
                     setUser((prev) => ({ ...prev, ...userData }));
 
                     // B. Fetch User Orders
                     const orderResponse = await fetch(
-                        `http://localhost:5000/orders/${userId}`
+                        `https://ecommerce-web-nrat.vercel.app/orders/${userId}`
                     );
                     const orderData = await orderResponse.json();
                     setOrders(orderData);
@@ -65,7 +65,7 @@ const UserProfile = () => {
         if (!user._id) return;
         try {
             const response = await fetch(
-                `http://localhost:5000/users/${user._id}`,
+                `https://ecommerce-web-nrat.vercel.app/users/${user._id}`,
                 {
                     method: "PUT",
                     headers: { "Content-Type": "application/json" },

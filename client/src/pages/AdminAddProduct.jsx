@@ -43,7 +43,7 @@ const AdminAddProduct = () => {
 
         try {
             // 2. Send POST Request to Backend
-            const response = await fetch("http://localhost:5000/products", {
+            const response = await fetch("https://ecommerce-web-nrat.vercel.app/products", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
