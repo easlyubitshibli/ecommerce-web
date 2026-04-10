@@ -7,10 +7,9 @@ import Header from "../components/Header";
 const UserProfile = () => {
     const [activeTab, setActiveTab] = useState("profile");
     const [isEditing, setIsEditing] = useState(false);
-    const [orders, setOrders] = useState([]); // State for Orders
+    const [orders, setOrders] = useState([]); 
     const navigate = useNavigate();
 
-    // Initialize user state
     const [user, setUser] = useState({
         name: "",
         email: "",
@@ -19,7 +18,6 @@ const UserProfile = () => {
         _id: "",
     });
 
-    // 1. Fetch User Data & Orders
     useEffect(() => {
         const fetchData = async () => {
             const storedUser = localStorage.getItem("user");
@@ -29,14 +27,12 @@ const UserProfile = () => {
                 const userId = localData._id;
 
                 try {
-                    // A. Fetch User Profile
                     const userResponse = await fetch(
                         `https://ecommerce-web-nrat.vercel.app/users/${userId}`
                     );
                     const userData = await userResponse.json();
                     setUser((prev) => ({ ...prev, ...userData }));
 
-                    // B. Fetch User Orders
                     const orderResponse = await fetch(
                         `https://ecommerce-web-nrat.vercel.app/orders/${userId}`
                     );
@@ -59,9 +55,6 @@ const UserProfile = () => {
     };
 
     const handleSave = async () => {
-        // ... (Keep your existing handleSave logic here) ...
-        // For brevity, I'm assuming you kept the handleSave logic from the previous step
-        // copying it here for completeness:
         if (!user._id) return;
         try {
             const response = await fetch(
@@ -102,7 +95,6 @@ const UserProfile = () => {
         return name.slice(0, 2).toUpperCase();
     };
 
-    // Helper to format date
     const formatDate = (dateString) => {
         return new Date(dateString).toLocaleDateString("en-US", {
             year: "numeric",
@@ -121,7 +113,6 @@ const UserProfile = () => {
                     </h1>
 
                     <div className="flex flex-col md:flex-row gap-8">
-                        {/* --- LEFT SIDEBAR --- */}
                         <div className="w-full md:w-1/4">
                             <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                                 <div className="p-6 text-center border-b border-gray-100 bg-gray-50">
@@ -171,9 +162,7 @@ const UserProfile = () => {
                             </div>
                         </div>
 
-                        {/* --- RIGHT CONTENT --- */}
                         <div className="w-full md:w-3/4">
-                            {/* PROFILE TAB */}
                             {activeTab === "profile" && (
                                 <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
                                     <div className="flex justify-between items-center mb-6">
@@ -278,7 +267,6 @@ const UserProfile = () => {
                                 </div>
                             )}
 
-                            {/* ORDERS TAB (Real Data) */}
                             {activeTab === "orders" && (
                                 <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                                     <div className="p-6 border-b border-gray-100">

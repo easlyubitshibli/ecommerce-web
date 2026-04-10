@@ -5,16 +5,13 @@ import Swal from "sweetalert2";
 const AdminRoute = ({ children }) => {
     const location = useLocation();
 
-    // 1. Get User from LocalStorage
     const storedUser = localStorage.getItem("user");
     const user = storedUser ? JSON.parse(storedUser) : null;
 
-    // 2. Scenario A: Not Logged In
     if (!user) {
         return <Navigate to="/login" state={{ from: location }} replace />;
     }
 
-    // 3. Scenario B: Logged In, BUT Not Admin
     if (user.status !== "admin") {
         Swal.fire({
             icon: "error",
@@ -26,7 +23,6 @@ const AdminRoute = ({ children }) => {
         return <Navigate to="/" replace />;
     }
 
-    // 4. Scenario C: Is Admin -> Render the Page
     return children;
 };
 

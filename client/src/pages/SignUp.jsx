@@ -7,7 +7,6 @@ import Header from "../components/Header";
 const Signup = () => {
     const navigate = useNavigate();
 
-    // State
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -18,19 +17,16 @@ const Signup = () => {
 
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState("");
-    const [loading, setLoading] = useState(false); // Added loading state
+    const [loading, setLoading] = useState(false);
 
-    // Handle Input Change
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
         setError("");
     };
 
-    // Handle Submit
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // 1. Basic Validation
         if (
             !formData.name ||
             !formData.email ||
@@ -41,13 +37,12 @@ const Signup = () => {
             return;
         }
 
-        // 2. Password Match Check
         if (formData.password !== formData.confirmPassword) {
             setError("Passwords do not match.");
             return;
         }
 
-        // 3. Password Length Check
+
         if (formData.password.length < 6) {
             setError("Password must be at least 6 characters.");
             return;
@@ -56,7 +51,6 @@ const Signup = () => {
         setLoading(true);
 
         try {
-            // --- CONNECT TO BACKEND HERE ---
             const response = await fetch("https://ecommerce-web-nrat.vercel.app/register", {
                 method: "POST",
                 headers: {
@@ -67,14 +61,12 @@ const Signup = () => {
                     email: formData.email,
                     phone: formData.phone,
                     password: formData.password,
-                    // Note: confirmPassword is usually not sent to backend
                 }),
             });
 
             const data = await response.json();
 
             if (response.ok) {
-                // SUCCESS: User Registered
                 Swal.fire({
                     icon: "success",
                     title: "Account Created!",
@@ -84,7 +76,6 @@ const Signup = () => {
                     navigate("/login");
                 });
             } else {
-                // ERROR: Email likely exists
                 setError(
                     data.message || "Registration failed. Please try again."
                 );

@@ -1,4 +1,3 @@
-// 1. Change import to 'react-router-dom'
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import ProductPage from "../pages/ProductPage";
@@ -17,7 +16,6 @@ import PaymentFail from "../pages/PaymentFail";
 import AdminOrders from "../pages/AdminOrders";
 import AdminRoute from "../components/AdminRoute";
 
-// 2. Declare with 'const' first
 const router = createBrowserRouter([
     {
         path: "/",

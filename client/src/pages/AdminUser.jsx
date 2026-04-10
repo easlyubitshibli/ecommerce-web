@@ -17,7 +17,7 @@ const AdminUser = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const navigate = useNavigate();
 
-    // 1. Fetch Users from Database
+  
     const fetchUsers = async () => {
         try {
             const response = await fetch("https://ecommerce-web-nrat.vercel.app/users");
@@ -33,7 +33,7 @@ const AdminUser = () => {
         fetchUsers();
     }, []);
 
-    // 2. Handle Delete User (Backend Integration)
+    
     const handleDelete = (id) => {
         Swal.fire({
             title: "Delete this user?",
@@ -60,7 +60,7 @@ const AdminUser = () => {
                             "User has been removed.",
                             "success"
                         );
-                        // Refresh the list locally without reloading
+                    
                         setUsers(users.filter((user) => user._id !== id));
                     } else {
                         Swal.fire("Error", "Failed to delete user", "error");
@@ -73,7 +73,6 @@ const AdminUser = () => {
         });
     };
 
-    // Filter Users
     const filteredUsers = users.filter(
         (user) =>
             (user.name || "")

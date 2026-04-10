@@ -5,22 +5,18 @@ import Header from "../components/Header";
 import { useCart } from "../context/CartContext";
 
 const Product = () => {
-    // 1. Data States
     const [products, setProducts] = useState([]);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-    // 2. Filter States
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedCategories, setSelectedCategories] = useState([]);
 
-    // Dynamic Data States
     const [dynamicCategories, setDynamicCategories] = useState([]);
-    const [maxPrice, setMaxPrice] = useState(100000); // Dynamic Max
-    const [priceRange, setPriceRange] = useState(100000); // Current Slider Value
+    const [maxPrice, setMaxPrice] = useState(100000); 
+    const [priceRange, setPriceRange] = useState(100000); 
 
     const { addToCart } = useCart();
 
-    // --- FETCH DATA ---
     useEffect(() => {
         const fetchProducts = async () => {
             try {
@@ -29,7 +25,6 @@ const Product = () => {
 
                 setProducts(data);
 
-                // A. Extract Categories
                 const uniqueCategories = [
                     ...new Set(
                         data.map((item) => item.category).filter(Boolean)
@@ -37,13 +32,12 @@ const Product = () => {
                 ];
                 setDynamicCategories(uniqueCategories);
 
-                // B. Find Highest Price for Slider
                 if (data.length > 0) {
                     const highestPrice = Math.max(
                         ...data.map((item) => item.price || 0)
                     );
                     setMaxPrice(highestPrice);
-                    setPriceRange(highestPrice); // Set slider to max initially so all items show
+                    setPriceRange(highestPrice); 
                 }
             } catch (error) {
                 console.error("Error fetching products:", error);
@@ -53,17 +47,13 @@ const Product = () => {
         fetchProducts();
     }, []);
 
-    // --- DERIVED STATE (The Fix) ---
     const filteredProducts = products.filter((product) => {
-        // 1. Search Logic
         const matchesSearch = product.name
             ? product.name.toLowerCase().includes(searchTerm.toLowerCase())
             : false;
 
-        // 2. Price Logic
         const matchesPrice = (product.price || 0) <= priceRange;
 
-        // 3. Category Logic
         const matchesCategory =
             selectedCategories.length === 0 ||
             selectedCategories.includes(product.category);
@@ -71,7 +61,6 @@ const Product = () => {
         return matchesSearch && matchesPrice && matchesCategory;
     });
 
-    // --- Handlers ---
     const handleCategoryChange = (category) => {
         setSelectedCategories((prev) =>
             prev.includes(category)
@@ -121,7 +110,7 @@ const Product = () => {
                         <input
                             type="range"
                             min="0"
-                            max={maxPrice} // Use dynamic max
+                            max={maxPrice}
                             value={priceRange}
                             onChange={(e) =>
                                 setPriceRange(Number(e.target.value))

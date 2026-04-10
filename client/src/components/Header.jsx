@@ -7,7 +7,7 @@ import {
     LogOut,
     UserCircle,
     X,
-    LayoutDashboard, // Icons for admin
+    LayoutDashboard, 
     Users,
     Package,
 } from "lucide-react";
@@ -24,7 +24,6 @@ const Header = () => {
     const { getCartCount } = useCart();
     const cartCount = getCartCount();
 
-    // Check for user on component mount & listen for updates
     useEffect(() => {
         const checkUser = () => {
             const storedUser = localStorage.getItem("user");
@@ -37,7 +36,6 @@ const Header = () => {
 
         checkUser();
 
-        // Listen for storage events (login/logout updates)
         window.addEventListener("storage", checkUser);
         return () => window.removeEventListener("storage", checkUser);
     }, []);
@@ -112,7 +110,6 @@ const Header = () => {
                             </Link>
                         </>
                     ) : (
-                        // Standard Links for Normal Users
                         <>
                             <Link
                                 to="/contact"

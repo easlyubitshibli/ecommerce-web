@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { ArrowLeft, Save, X } from "lucide-react";
-import { useNavigate, useParams } from "react-router-dom"; // useParams to get ID
+import { useNavigate, useParams } from "react-router-dom"; 
 import Swal from "sweetalert2";
 import Header from "../components/Header";
 
 const AdminEditProduct = () => {
     const navigate = useNavigate();
-    const { id } = useParams(); // Get product ID from URL
+    const { id } = useParams(); 
 
     const [formData, setFormData] = useState({
         name: "",
@@ -18,7 +18,6 @@ const AdminEditProduct = () => {
         image: "",
     });
 
-    // 1. Fetch Existing Data
     useEffect(() => {
         const fetchProduct = async () => {
             try {
@@ -26,7 +25,7 @@ const AdminEditProduct = () => {
                     `https://ecommerce-web-nrat.vercel.app/products/${id}`
                 );
                 const data = await response.json();
-                // Fill form with data
+                
                 setFormData({
                     name: data.name || "",
                     category: data.category || "",
@@ -47,7 +46,7 @@ const AdminEditProduct = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    // 2. Handle Update (PUT Request)
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
 

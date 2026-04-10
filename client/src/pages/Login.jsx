@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import { Mail, Lock, ArrowRight, Eye, EyeOff } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
-import Swal from "sweetalert2"; // Import SweetAlert for error messages
+import Swal from "sweetalert2";
 import Header from "../components/Header";
 
 const Login = () => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({ email: "", password: "" });
     const [showPassword, setShowPassword] = useState(false);
-    const [loading, setLoading] = useState(false); // Add loading state
-
+    const [loading, setLoading] = useState(false); 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
@@ -19,7 +18,6 @@ const Login = () => {
         setLoading(true);
 
         try {
-            // 1. Send Request to Backend
             const response = await fetch("https://ecommerce-web-nrat.vercel.app/login", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -29,15 +27,12 @@ const Login = () => {
             const data = await response.json();
 
             if (data.success) {
-                // 2. Save User to LocalStorage
                 localStorage.setItem("user", JSON.stringify(data.user));
 
-                // 3. Force Header Update (Quick fix) & Redirect
                 window.dispatchEvent(new Event("storage"));
                 navigate("/");
                 window.location.reload();
             } else {
-                // Show Error Alert
                 Swal.fire({
                     icon: "error",
                     title: "Login Failed",

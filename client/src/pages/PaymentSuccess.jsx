@@ -7,7 +7,6 @@ const PaymentSuccess = () => {
     const { clearCart } = useCart();
 
     useEffect(() => {
-        // Clear the cart context/localstorage now that payment is done
         clearCart();
     }, []);
 

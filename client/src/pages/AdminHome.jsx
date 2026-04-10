@@ -9,7 +9,6 @@ const AdminHome = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const navigate = useNavigate();
 
-    // 1. Fetch Products
     useEffect(() => {
         const fetchProducts = async () => {
             try {
@@ -27,7 +26,7 @@ const AdminHome = () => {
         return () => clearTimeout(delayDebounceFn);
     }, [searchTerm]);
 
-    // 2. Delete Product (Matches your DELETE req)
+   
     const handleDelete = (id) => {
         Swal.fire({
             title: "Are you sure?",

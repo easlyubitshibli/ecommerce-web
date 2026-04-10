@@ -1,16 +1,12 @@
 import React from "react";
-// Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-// Import Swiper modules
 import { Navigation, Pagination, Autoplay, EffectFade } from "swiper/modules";
 import { Link } from "react-router-dom";
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/effect-fade";
 
-// Your slides data (Ensure this is defined above or imported)
 const slides = [
     {
         id: 1,

@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Star, ShoppingCart } from "lucide-react";
-import { useCart } from "../context/CartContext"; // 1. Import Cart Context
+import { useCart } from "../context/CartContext"; 
 
-// Reusable Product Card Component
 const ProductCard = ({ product }) => {
-    const { addToCart } = useCart(); // 2. Get addToCart function
-
+    const { addToCart } = useCart(); 
     return (
         <div className="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 p-4 flex flex-col h-full">
             {/* Product Image */}
@@ -46,19 +44,16 @@ const ProductCard = ({ product }) => {
     );
 };
 
-// Main Trending Products Section
+
 const TrendingProduct = () => {
     const [products, setProducts] = useState([]);
 
-    // Fetch Products from Backend
     useEffect(() => {
         const fetchProducts = async () => {
             try {
                 const response = await fetch("https://ecommerce-web-nrat.vercel.app/products");
                 const data = await response.json();
 
-                // Simulate "Trending" by taking a slice, or reversing to show newest
-                // taking first 8 items for the grid
                 setProducts(data.slice(0, 8));
             } catch (error) {
                 console.error("Error fetching trending products:", error);

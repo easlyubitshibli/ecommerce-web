@@ -1,24 +1,19 @@
 import React, { useState, useEffect } from "react";
-// Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-// Import Swiper modules
 import { Pagination, Autoplay } from "swiper/modules";
-import { Link } from "react-router-dom"; // To make cards clickable
+import { Link } from "react-router-dom"; 
 
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
 
 const ProductSlider = () => {
     const [products, setProducts] = useState([]);
 
-    // Fetch Products from Backend
     useEffect(() => {
         const fetchProducts = async () => {
             try {
                 const response = await fetch("https://ecommerce-web-nrat.vercel.app/products");
                 const data = await response.json();
-                // We can slice the data if we only want to show a few in the slider (e.g., first 10)
                 setProducts(data.slice(0, 10));
             } catch (error) {
                 console.error("Error fetching slider products:", error);

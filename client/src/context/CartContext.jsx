@@ -4,18 +4,15 @@ import Swal from "sweetalert2";
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-    // 1. Initialize State
     const [cartItems, setCartItems] = useState(() => {
         const savedCart = localStorage.getItem("cartItems");
         return savedCart ? JSON.parse(savedCart) : [];
     });
 
-    // 2. Save to LocalStorage
     useEffect(() => {
         localStorage.setItem("cartItems", JSON.stringify(cartItems));
     }, [cartItems]);
 
-    // 3. Restore Cart from Database on Login
     useEffect(() => {
         const restoreCart = async () => {
             const user = JSON.parse(localStorage.getItem("user"));
@@ -36,7 +33,6 @@ export const CartProvider = ({ children }) => {
         restoreCart();
     }, []);
 
-    // --- HELPER: Sync with DB ---
     const updateDbQuantity = async (productId, type) => {
         const user = JSON.parse(localStorage.getItem("user"));
         if (user && user._id) {
@@ -56,7 +52,6 @@ export const CartProvider = ({ children }) => {
         }
     };
 
-    // --- ACTIONS ---
 
     const addToCart = async (product) => {
         setCartItems((prevItems) => {
@@ -89,7 +84,6 @@ export const CartProvider = ({ children }) => {
             timer: 1000,
         });
 
-        // Sync Add with DB
         const user = JSON.parse(localStorage.getItem("user"));
         if (user && user._id) {
             try {
@@ -123,13 +117,11 @@ export const CartProvider = ({ children }) => {
         );
     };
 
-    // --- NEW: Clear Cart Function ---
     const clearCart = () => {
-        setCartItems([]); // Clear State
-        localStorage.removeItem("cartItems"); // Clear Storage
+        setCartItems([]); 
+        localStorage.removeItem("cartItems"); 
     };
 
-    // --- GETTERS ---
     const getCartCount = () => {
         return cartItems.reduce(
             (total, item) => total + (item.quantity || 1),
@@ -151,7 +143,7 @@ export const CartProvider = ({ children }) => {
                 addToCart,
                 decreaseQuantity,
                 removeFromCart,
-                clearCart, // <--- THIS WAS MISSING
+                clearCart,
                 getCartCount,
                 getCartTotal,
             }}

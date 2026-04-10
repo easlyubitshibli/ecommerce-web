@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 const AdminAddProduct = () => {
     const navigate = useNavigate();
 
-    // Form State
+   
     const [formData, setFormData] = useState({
         name: "",
         category: "",
@@ -17,7 +17,7 @@ const AdminAddProduct = () => {
         image: "",
     });
 
-    // Handle Input Change
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({
@@ -26,11 +26,11 @@ const AdminAddProduct = () => {
         });
     };
 
-    // Handle Form Submit
+  
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // 1. Basic Validation
+        
         if (!formData.name || !formData.price || !formData.category) {
             Swal.fire({
                 icon: "error",
@@ -42,7 +42,7 @@ const AdminAddProduct = () => {
         }
 
         try {
-            // 2. Send POST Request to Backend
+         
             const response = await fetch("https://ecommerce-web-nrat.vercel.app/products", {
                 method: "POST",
                 headers: {
@@ -51,7 +51,7 @@ const AdminAddProduct = () => {
                 body: JSON.stringify(formData),
             });
 
-            // 3. Handle Response
+           
             if (response.ok) {
                 Swal.fire({
                     title: "Success!",
@@ -59,7 +59,7 @@ const AdminAddProduct = () => {
                     icon: "success",
                     confirmButtonColor: "#000",
                 }).then(() => {
-                    navigate("/adminhome"); // Redirect to Admin Home
+                    navigate("/adminhome"); 
                 });
             } else {
                 Swal.fire({

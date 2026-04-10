@@ -9,7 +9,6 @@ const AdminOrders = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const navigate = useNavigate();
 
-    // 1. Fetch All Orders
     const fetchOrders = async () => {
         try {
             const response = await fetch("https://ecommerce-web-nrat.vercel.app/admin/orders");
@@ -24,9 +23,7 @@ const AdminOrders = () => {
         fetchOrders();
     }, []);
 
-    // 2. Handle Status Update
     const handleStatusUpdate = async (id, newStatus) => {
-        // Confirmation Dialog
         const result = await Swal.fire({
             title: `Mark as ${newStatus}?`,
             text: `You are about to set this order to ${newStatus}.`,
@@ -55,7 +52,7 @@ const AdminOrders = () => {
                         `Order marked as ${newStatus}.`,
                         "success"
                     );
-                    fetchOrders(); // Refresh table
+                    fetchOrders(); 
                 } else {
                     Swal.fire("Error", "Failed to update status", "error");
                 }
@@ -66,7 +63,6 @@ const AdminOrders = () => {
         }
     };
 
-    // Filter logic
     const filteredOrders = orders.filter(
         (order) =>
             (order.transactionId || order._id)
@@ -77,7 +73,6 @@ const AdminOrders = () => {
                 .includes(searchTerm.toLowerCase())
     );
 
-    // Helper for Status Badge Color
     const getStatusColor = (status) => {
         switch (status) {
             case "Delivered":
@@ -87,7 +82,7 @@ const AdminOrders = () => {
             case "Processing":
                 return "bg-blue-100 text-blue-800";
             default:
-                return "bg-yellow-100 text-yellow-800"; // Pending
+                return "bg-yellow-100 text-yellow-800"; 
         }
     };
 

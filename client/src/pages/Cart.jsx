@@ -6,7 +6,6 @@ import Swal from "sweetalert2";
 import Header from "../components/Header";
 
 const Cart = () => {
-    // Destructure it first
     const {
         cartItems,
         addToCart,
@@ -16,12 +15,10 @@ const Cart = () => {
     } = useCart();
     const navigate = useNavigate();
 
-    // Calculate dynamic values
     const subtotal = getCartTotal();
-    const shipping = subtotal > 5000 ? 0 : 150; // Free shipping over 5000
+    const shipping = subtotal > 5000 ? 0 : 150; 
     const total = subtotal + shipping;
 
-    // Handle Removing Item (with confirmation)
     const handleRemove = (id) => {
         Swal.fire({
             title: "Remove Item?",
@@ -39,8 +36,6 @@ const Cart = () => {
         });
     };
 
-    // Handle Checkout (Mock)
-    // ... imports
 
     const handleCheckout = async () => {
         const user = JSON.parse(localStorage.getItem("user"));
@@ -51,7 +46,6 @@ const Cart = () => {
             return;
         }
 
-        // Get Address
         const { value: address } = await Swal.fire({
             title: "Enter Delivery Address",
             input: "text",
@@ -62,7 +56,6 @@ const Cart = () => {
         if (!address) return;
 
         try {
-            // Call Backend to Init Payment
             const response = await fetch(
                 "https://ecommerce-web-nrat.vercel.app/create-ssl-payment",
                 {
@@ -79,7 +72,6 @@ const Cart = () => {
 
             const data = await response.json();
 
-            // Redirect user to SSLCommerz Gateway
             if (data.url) {
                 window.location.replace(data.url);
             } else {
@@ -195,11 +187,11 @@ const Cart = () => {
                                                                 item._id ||
                                                                     item.productId
                                                             )
-                                                        } // Or handle decrease logic
+                                                        }
                                                         className="p-2 hover:bg-gray-100 transition-colors disabled:opacity-50"
                                                         disabled={
                                                             item.quantity <= 1
-                                                        } // Disable minus if quantity is 1 (optional, usually minus at 1 removes item)
+                                                        }
                                                     >
                                                         <Minus className="w-3 h-3" />
                                                     </button>
@@ -209,7 +201,7 @@ const Cart = () => {
                                                     <button
                                                         onClick={() =>
                                                             addToCart(item)
-                                                        } // Re-adding increments quantity in your context logic
+                                                        }
                                                         className="p-2 hover:bg-gray-100 transition-colors"
                                                     >
                                                         <Plus className="w-3 h-3" />
